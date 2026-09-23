@@ -35,7 +35,16 @@
 
     <dependencies>
 
-     
+        <dependency>
+            <groupId>net.microfalx.service</groupId>
+            <artifactId>service-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.microfalx</groupId>
+            <artifactId>lang</artifactId>
+        </dependency>
 
     </dependencies>
 

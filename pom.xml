@@ -140,11 +140,6 @@
 
         <dependency>
             <groupId>net.microfalx</groupId>
-            <artifactId>metrics</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>net.microfalx</groupId>
             <artifactId>lang</artifactId>
         </dependency>
 

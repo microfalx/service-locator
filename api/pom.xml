@@ -55,6 +55,21 @@
                     <artifactId>commons-lang3</artifactId>
                 </exclusion>
 
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>org.jodd</groupId>
+                    <artifactId>jodd-bean</artifactId>
+                </exclusion>
+
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+
             </exclusions>
 
         </dependency>
