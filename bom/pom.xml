@@ -31,7 +31,7 @@
     </parent>
 
     <name>Service Locator :: BOM</name>
-    <description>Bill of Materials for resources</description>
+    <description>Bill of Materials for services</description>
 
     <dependencyManagement>
         <dependencies>
@@ -43,7 +43,7 @@
             </dependency>
 
             <dependency>
-                <groupId>net.microfalx.argus</groupId>
+                <groupId>net.microfalx.service</groupId>
                 <artifactId>service-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
