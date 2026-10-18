@@ -82,6 +82,18 @@ public class ServiceLocatorImpl extends ServiceLocator implements Initializable 
         }
     }
 
+    @Override
+    public void ready() {
+        synchronized (ServiceLocatorImpl.class) {
+            LOGGER.debug("Application is ready");
+            Collection<Service> loadedServices = getServices();
+            loadedServices.forEach(service -> {
+                readyService(service);
+                notifyReady(service);
+            });
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public <S extends Service> void shutdown(Class<S> serviceClass) {
         requireNonNull(serviceClass);
@@ -209,6 +221,17 @@ public class ServiceLocatorImpl extends ServiceLocator implements Initializable 
         }
     }
 
+    private void notifyReady(Service service) {
+        for (Service.Listener listener : listeners) {
+            try {
+                listener.onServiceReady(service);
+            } catch (Exception e) {
+                LOGGER.atWarn().setCause(e).log("Failed to notify listener {} that service {} is ready",
+                        ClassUtils.getName(listener), ClassUtils.getName(service));
+            }
+        }
+    }
+
     private void notifyStopped(Service service) {
         for (Service.Listener listener : listeners) {
             try {
@@ -245,7 +268,18 @@ public class ServiceLocatorImpl extends ServiceLocator implements Initializable 
             try {
                 ((Service.Lifecycle) service).start();
             } catch (Exception e) {
-                LOGGER.atError().setCause(e).log("Failed to stop service {}",
+                LOGGER.atError().setCause(e).log("Failed to start service {}",
+                        ClassUtils.getName(service));
+            }
+        }
+    }
+
+    static void readyService(Object service) {
+        if (service instanceof Service.Lifecycle) {
+            try {
+                ((Service.Lifecycle) service).ready();
+            } catch (Exception e) {
+                LOGGER.atError().setCause(e).log("Failed to ready service {}",
                         ClassUtils.getName(service));
             }
         }

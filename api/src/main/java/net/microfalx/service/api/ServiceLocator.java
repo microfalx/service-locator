@@ -92,6 +92,14 @@ public abstract class ServiceLocator {
     public abstract void shutdown();
 
     /**
+     * Notifies all the services that the application is ready to start processing requests.
+     * <p>
+     * Depending on the framework supporting the application, this method can be called after all
+     * services were initialized, web container was started and the application is ready to receive requests.
+     */
+    public abstract void ready();
+
+    /**
      * Returns a collection of all loaded services.
      *
      * @return a non-null instance

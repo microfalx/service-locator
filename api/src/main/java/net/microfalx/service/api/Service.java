@@ -105,6 +105,13 @@ public interface Service extends Identifiable<String>, Nameable, Descriptable {
         void start();
 
         /**
+         * Starts the application (ready state).
+         */
+        default void ready() {
+
+        }
+
+        /**
          * Stops the service.
          */
         default void stop() {
@@ -246,6 +253,14 @@ public interface Service extends Identifiable<String>, Nameable, Descriptable {
          * @param service the service
          */
         default void onServiceStarted(Service service) {
+        }
+
+        /**
+         * Notifies the listener that a service was ready since the application is ready to receive requests.
+         *
+         * @param service the service
+         */
+        default void onServiceReady(Service service) {
         }
 
         /**
